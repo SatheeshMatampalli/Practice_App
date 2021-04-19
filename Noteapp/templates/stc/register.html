@@ -1,0 +1,42 @@
+{% extends 'stc/base.html' %}
+{% block title %}register{% endblock %}
+{% block content %}
+<div class="container">
+	<div class="card col-md-6 mx-auto mt-4 shadow-lg">
+		<h3 class="bg-warning text-dark text-center p-2 border rounded mt-3">Registration</h3>
+		<div class="card-body">
+			<form method="POST">
+				{% csrf_token %}
+				<!-- {{u.as_p}} -->
+				<table class="table table-borderless">
+					{% for k in u %}
+					<tr>
+						<td>
+							{{k}}
+						</td>
+					</tr>
+					{% endfor %}
+
+				</table>
+				<div class="row">
+						<div class="col">
+							<a href="{% url 'log' %}" class="form-control btn btn-info col-sm" >Existing user</a>
+							
+						</div>
+						<div class="col">
+							<input type="submit" class="form-control btn btn-success col-sm" name="subscribe">
+						</div>	
+				</div>	
+
+			</form>
+			
+		</div>
+		
+	</div>
+	
+</div>
+
+
+
+
+{% endblock %}

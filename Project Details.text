@@ -1,0 +1,83 @@
+
+Project:
+========
+project 
+	- projectname [admin]
+	- userapp
+
+settings
+	- Installed_apps -> App configuration
+
+Adminapp:
+=========
+- urls => include('appname.urls')
+
+Userapp:
+========
+urls => paths,urlpatterns
+
+views:
+======
+	- functionname(mechanism)
+	- render(self,'.html file')
+
+- templates
+	- folder
+		- .html file[header,base,include,extends,navbar]
+- static
+	- css,js
+	- jquery
+
+- collapse navbar
+- dropdown => logout,changepassword,profile
+
+- migrate
+-> makemigrations and migrate
+
+- forms.py => userapp
+- models[existing models]
+	- User
+- forms => [existing form]
+	- UserCreationForm
+- messages
+	-> Login
+- urls => LoginView,LogoutView
+- settings -> Login_url,redirect_url
+- dashboard 
+-> Decorator - login_required
+-> User Info
+	-> User update
+	- forms - forms.ModelForm
+	- fields => bootstrap
+-> models
+	- fields
+	- pip install pillow
+	- signals concept - post_save
+	- makemigrations,migrate
+- forms
+	- classname - views
+- settings - admin urls
+- change password
+	- forms - PasswordChangeForm 
+	- views - data
+- reset password
+	- existing email
+	- passwordReset -> email
+	- passwordResetDone -> info
+	- passwordResetconfirm -> form
+	- passwordResetcomplete -> password change
+
+
+Navbar.html
+============
+Leave
+	- Apply Leave => create
+	- View Leave => view
+	- Update Leave => update
+	- Delete Leave => delete
+
+
+
+
+
+

@@ -1,0 +1,58 @@
+{% load static %}
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <!-- Brand/logo -->
+  <a class="navbar-brand" href="{% url 'hm' %}">
+    <img src="{% static 'images/logo.jpg' %}" alt="logo" style="width:40px;">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+   <div class="collapse navbar-collapse" id="collapsibleNavbar">
+  <!-- Links -->
+  <ul class="navbar-nav">
+    {% if not user.is_authenticated %}
+    
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'hm' %}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'cp' %}">Complaint</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'ab' %}">Aboutus</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'cn' %}">Contactus</a>
+    </li>
+    {% else %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'hm' %}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'dsh' %}">Dashboard</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'show' %}">Showusers</a>
+    </li>
+    {% endif %}
+  </ul>
+  <ul class="navbar-nav ml-auto" style="margin-right:120px">
+    {% if not user.is_authenticated %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'log' %}">Login</a>
+    </li>
+    {% else %}
+        <li class="dropdown">
+  <a type="button" class="nav-link dropdown-toggle" data-toggle="dropdown">
+    {{user.username}}
+  </a>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="{% url 'cg' %}">change password</a>
+    <a class="dropdown-item" href="{% url 'profile' %}">profile</a>
+    <a class="dropdown-item" href="{% url 'logo' %}">logout</a>
+  </div>
+</li>
+{% endif %}
+  </ul>
+</div>
+</nav>

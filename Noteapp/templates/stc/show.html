@@ -1,0 +1,81 @@
+{% extends 'stc/base.html' %}
+{% block title %}Contact{% endblock %}
+{% block content %}
+
+<script>
+	console.alert("hi")
+</script>
+<div class="container mb-3 mt-3">
+	<h4>select no of rows</h4>
+	<div class="form-group">
+		<select name="state" id="maxRows" class="form-control" style="width: 150px">
+			<option value="5">5</option>
+			<option value="10">10</option>
+			<option value="20">20</option>
+			<option value="50">50</option>
+			<option value="100">100</option>
+			<option value="5000">ShowAll</option>
+
+		</select>
+		
+	</div>
+	<br>
+	<table class="table table-bordered ">
+				<tr class="bg-dark text-white">
+					<th >Age</th>
+					<th>Username</th>
+				
+				</tr>
+				{% for i in data1 %}
+				<tr>
+					<td>{{i.username}}</td>
+					<td>{{i.username}}</td>
+
+				</tr>
+				
+				{% endfor %}
+
+	</table>
+	{% include 'stc/pagination.html' with page=data1 %}
+	<br><br>
+	<a href="{% url 'export-csv' %}" class="btn btn-secondary">CSV</a>
+	<a href="{% url 'createpdf' %}" class="btn btn-warning">PDF</a>
+	<table class="table table-bordered mydatatable" id="mytable" width="100%">
+				<tr>
+					<th>Age</th>
+					<th>Username</th>
+					
+				</tr>
+				{% for i in dd %}
+				<tr>
+					<td>{{i.0}}</td>
+					<td>{{i.1}}</td>
+
+				</tr>
+				
+				{% endfor %}
+	</table>
+	
+			
+</div>
+<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+ <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+<script>
+	$('.mydatatable').DataTable({
+		searching:false,
+		ordering:false,
+		lengthMenu:[[5,10,25,50,-1],[5,10,25,50,"All"]],
+		
+	});
+</script>
+<script>
+	var table='#mytable'
+	$('#maxRows').on('change',function(){
+		$('.pagination').html()
+		var trnum=0
+		var maxRows=parseInt($(this).val())
+	})
+
+</script> -->
+{% endblock %}

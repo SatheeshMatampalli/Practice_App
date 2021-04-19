@@ -1,0 +1,14 @@
+{% extends 'stc/base.html' %}
+{% block title %}Logout{% endblock %}
+{% block content %}
+<div class="container">
+	<div class="card col-md-6 mx-auto mt-4 shadow-lg">
+		<h3 class="bg-primary text-white text-center p-3 ">logout</h3>
+		<div class="card-body">
+			<h2>sucessfully logged out</h2>
+			<h3>you need to login again click here <a href="{% url 'log' %}" class="form-control btn btn-warning">proceed</a></h3>
+		</div>
+	</div>
+	
+</div>
+{% endblock %}
