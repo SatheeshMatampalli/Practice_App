@@ -1,11 +1,11 @@
 from django.shortcuts import render,redirect
-from Noteapp.forms import UsForm,ComplaintForm,ImForm,UtupForm,ChpwdForm
+from Noteapp.forms import UsForm,ComplaintForm,ImForm,UtupForm,ChpwdForm,BookForm
 from django.core.mail import send_mail
 from NoteSharing import settings
 from django.contrib import messages
 from django.http import HttpResponse,JsonResponse
 from django.contrib.auth.models import User
-from Noteapp.models import ImProfile
+from Noteapp.models import ImProfile,Bookreq
 from django.contrib.auth.decorators import login_required
 import datetime
 import csv
@@ -79,6 +79,60 @@ def about(request):
 def contact(request):
 	return render(request,'stc/contact.html')
 
+@login_required
+def bookcheck(request):
+	if request.method=="POST":
+		p=BookForm(request.POST)
+		if p.is_valid():
+			d=p.save(commit=False)
+			d.uploadby=request.user.email
+			d.up_id=request.user.id
+			# print(d.uploadby,d.uploaddate,d.upload_type.url)
+			d.save()
+		return redirect('/')
+	p=BookForm()
+	return render(request,'stc/bookcheck.html',{'p':p})
+
+@login_required
+def viewnt(req):
+	accept=Bookreq.objects.filter(is_status=1).count()
+	accept1=Bookreq.objects.filter(is_status=1)
+	pending=Bookreq.objects.filter(is_status=0).count()
+	pending1=Bookreq.objects.filter(is_status=0)
+	allnotes=Bookreq.objects.all().count()
+	allnotes1=Bookreq.objects.all()
+	acc=Bookreq.objects.filter(is_status=2).count()
+	acc1=Bookreq.objects.filter(is_status=2)
+	return render(req,'stc/adminpage.html',{'acc':acc,'acc1':acc1,'accept1':accept1,'accept':accept,'pending':pending,'pending1':pending1,'allnotes':allnotes,'allnotes1':allnotes1})
+
+def notipending(req):
+	pending2=Bookreq.objects.filter(is_status=0)
+	return render(req,'stc/noti_pendingdata.html',{'pending2':pending2})
+
+
+@login_required
+def myreq(req):
+	notes=Bookreq.objects.filter(up_id=req.user)
+	return render(req,'stc/myreq.html',{'data':notes})
+
+def acceptadmin(req,id):
+	ac=Bookreq.objects.get(id=id)
+	ac.is_status='1'
+	ac.save()
+	return redirect('/viewn')
+
+def rejectadmin(req,id):
+	rc=Bookreq.objects.get(id=id)
+	rc.is_status='2'
+	rc.save()
+	return redirect('/viewn')
+
+def datadelete(req,id):
+	obj=Bookreq.objects.get(id=id)
+	obj.delete()
+	return redirect('/myreq')
+
+
 def regi(request):
 	if request.method=="POST":
 		p=UsForm(request.POST)
@@ -90,7 +144,8 @@ def regi(request):
 
 @login_required
 def dashboard(request):
-	return render(request,'stc/dashboard.html')
+	d = Bookreq.objects.filter(is_status=0).count()
+	return render(request,'stc/dashboard.html',{'d':d})
 
 @login_required	
 def profile(req):

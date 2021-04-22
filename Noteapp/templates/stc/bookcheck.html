@@ -1,0 +1,18 @@
+{% extends 'stc/base.html' %}
+{% block content %}
+<div class="container">
+	<div class="card col-md-6 mx-auto mt-4 shadow-lg">
+		<h3 class="bg-warning text-dark text-center p-2 border rounded mt-3">Registration</h3>
+		<div class="card-body">
+			<form method="POST">
+				{% csrf_token %}
+				<!-- {{u.as_p}} -->
+				<table class="table table-borderless">
+					{{p.as_p}}
+				</table>
+				<input type="submit" value="submit">
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

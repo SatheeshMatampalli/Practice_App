@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm,PasswordChangeForm
 from django import forms
-from Noteapp.models import Complaintbox,ImProfile
+from Noteapp.models import Complaintbox,ImProfile,Bookreq
 
 
 class UsForm(UserCreationForm):
@@ -22,6 +22,12 @@ class ComplaintForm(forms.ModelForm):
 	class Meta:
 		model=Complaintbox
 		fields="__all__"
+
+class BookForm(forms.ModelForm):
+	class Meta:
+		model=Bookreq
+		fields=['Book_code','date']
+
 
 class UtupForm(forms.ModelForm):
 	class Meta:

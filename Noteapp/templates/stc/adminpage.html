@@ -1,0 +1,46 @@
+{% extends 'stc/base.html' %}
+{% block title %}##AdminPage##{% endblock %}
+{% block content %}
+<style>
+	.b:hover{
+		background-color: #99ff99;
+	}
+</style>
+<div class="container">
+	<div class="row" style="margin-top: 100px;">
+		<div class="col-sm-1"></div>
+		<div class="col-sm-2 mr-4 card b" style="">
+  		  <div class="card-body">
+		    <h5 class="card-title">Pending Notifications</h5>
+		    <p>{{pending}}</p>
+		    <a href="{% url 'notipending' %}" class="btn btn-primary">View</a>
+		  </div>
+		</div>
+		<div class="col-sm-2 card mr-4 b" style="">
+  		  <div class="card-body">
+		    <h5 class="card-title">Accepted Notifications</h5>
+		    <p>{{accept}}</p>
+		    <a href="" class="btn btn-primary">View</a>
+		  </div>
+		</div>
+		<div class="col-sm-2 card mr-4 b" style="">
+  		  <div class="card-body">
+		    <h5 class="card-title">Rejected Notification</h5>
+		    <p>{{acc}}</p>
+		    <a href="" class="btn btn-primary">View</a>
+		  </div>
+		</div>
+		<div class="col-sm-2 card b" style="">
+  		  <div class="card-body">
+		    <h5 class="card-title">All Notifications</h5>
+		    <p>{{allnotes}}</p>
+		    <a href="" class="btn btn-primary">View</a>
+		  </div>
+		</div>
+		<div class="col-sm-"></div>
+	</div>
+	
+</div>
+
+
+{% endblock %}

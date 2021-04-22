@@ -4,7 +4,14 @@ from django.contrib.auth import views as ad
 
 urlpatterns = [
 	path('',views.home,name="hm"),
+	path('viewn/',views.viewnt,name='viewn'),
+	path('notipending/',views.notipending,name="notipending"),
+	path('myreq/',views.myreq,name='myreq'),
+	path('noteaccept/<str:id>',views.acceptadmin,name="acceptadmin"),
+	path('notereject/<str:id>',views.rejectadmin,name="rejectadmin"),
+	path('notedelete/<str:id>',views.datadelete,name="datadelete"),
 	path('pro/',views.profile,name="profile"),
+	path('bookchk/',views.bookcheck,name="bkcheck"),
 	path('show/',views.show,name="show"),
 	path('excsv/',views.export_csv,name="export-csv"),
 	# path('expdf/',views.export_pdf,name="export-pdf"),

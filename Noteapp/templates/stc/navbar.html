@@ -10,7 +10,7 @@
    <div class="collapse navbar-collapse" id="collapsibleNavbar">
   <!-- Links -->
   <ul class="navbar-nav">
-    {% if not user.is_authenticated %}
+    {% if not user.is_authenticated and not user.is_superuser %}
     
     <li class="nav-item">
       <a class="nav-link" href="{% url 'hm' %}">Home</a>
@@ -24,7 +24,7 @@
     <li class="nav-item">
       <a class="nav-link" href="{% url 'cn' %}">Contactus</a>
     </li>
-    {% else %}
+    {% elif not user.is_superuser %}
     <li class="nav-item">
       <a class="nav-link" href="{% url 'hm' %}">Home</a>
     </li>
@@ -33,6 +33,16 @@
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{% url 'show' %}">Showusers</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'myreq' %}">View Myreq</a>
+      </li>
+     <li class="nav-item">
+      <a class="nav-link" href="{% url 'bkcheck' %}">BookOrder_Check</a>
+    </li>
+    {% else %}
+    <li class="nav-item" style='display:inline'>
+      <a class="nav-link" href="{% url 'viewn' %}">ViewNotifications</a><sub class="text-light">View<sup class="text-danger">{{d}}</sup></sub>
     </li>
     {% endif %}
   </ul>

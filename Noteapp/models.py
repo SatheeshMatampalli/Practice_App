@@ -20,3 +20,11 @@ class ImProfile(models.Model):
 def createpf(sender,instance,created,**kwargs):
 	if created:
 		ImProfile.objects.create(uid=instance)
+
+class Bookreq(models.Model):
+	Book_code=models.CharField(max_length=30)
+	date=models.DateField()
+	is_status=models.IntegerField(default=0)
+	uploadby=models.CharField(max_length=120,default="")
+	up=models.ForeignKey(User,on_delete=models.CASCADE,default="")
+
