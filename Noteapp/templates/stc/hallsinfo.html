@@ -1,0 +1,21 @@
+{% extends 'stc/base.html' %}
+{% block title %}profile{% endblock %}
+{% block content %}
+<div class="container">
+	<h3 class="p-2 bg-info text-center text-light border rounded my-2">Halls Details</h3>
+	<div class="row">
+		
+		{% for i in d %}
+		<div class="col-md-4 card">
+			<div class="card-body">
+				<h4>{{i.h_name}}</h4>
+				<h4>{{i.h_capacity}}</h4>
+				<h4><img src="{{i.h_images.url}}"></h4>
+				<h4>{{i.h_number}}</h4>
+			</div>
+			
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}

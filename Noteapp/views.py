@@ -1,11 +1,11 @@
 from django.shortcuts import render,redirect
-from Noteapp.forms import UsForm,ComplaintForm,ImForm,UtupForm,ChpwdForm,BookForm
+from Noteapp.forms import UsForm,ComplaintForm,ImForm,UtupForm,HallForm,ChpwdForm,BookForm
 from django.core.mail import send_mail
 from NoteSharing import settings
 from django.contrib import messages
 from django.http import HttpResponse,JsonResponse
 from django.contrib.auth.models import User
-from Noteapp.models import ImProfile,Bookreq
+from Noteapp.models import ImProfile,Bookreq,Halldistrict,Hallname,Halldetails
 from django.contrib.auth.decorators import login_required
 import datetime
 import csv
@@ -105,6 +105,8 @@ def viewnt(req):
 	acc1=Bookreq.objects.filter(is_status=2)
 	return render(req,'stc/adminpage.html',{'acc':acc,'acc1':acc1,'accept1':accept1,'accept':accept,'pending':pending,'pending1':pending1,'allnotes':allnotes,'allnotes1':allnotes1})
 
+
+
 def notipending(req):
 	pending2=Bookreq.objects.filter(is_status=0)
 	return render(req,'stc/noti_pendingdata.html',{'pending2':pending2})
@@ -181,6 +183,17 @@ def updpf(request):
 	return render(request,'stc/updateprofile.html',{'us':u,"imp":i})
 
 @login_required
+def reghalls(req):
+	if req.method=="POST":
+		u=HallForm(req.POST,req.FILES)
+		if u.is_valid():
+			u.save()
+			return redirect('/')
+	t=HallForm()
+	return render(req,'stc/halls.html',{'t':t})
+
+
+@login_required
 def cgf(request):
 	if request.method=="POST":
 		c=ChpwdForm(user=request.user,data=request.POST)
@@ -190,3 +203,25 @@ def cgf(request):
 
 	c=ChpwdForm(user=request)
 	return render(request,'stc/changepassword.html',{'t':c})
+
+
+def load_courses(req):
+	programming_id=req.GET.get('programming')
+	print(programming_id)
+	courses=Hallname.objects.filter(programming_id=programming_id).order_by('name')
+	print(courses)
+	return render(req,'stc/dropd.html',{'courses':courses})
+
+
+
+def hallsview(req):
+	if req.method=="POST":
+		ml=req.POST['programming']
+		mlm=req.POST['courses']
+		print(ml,mlm)
+		d=Halldetails.objects.filter(hallid=mlm)
+		return render(req,'stc/hallsinfo.html',{'d':d})
+
+	data=Halldistrict.objects.all()
+	return render(req,'stc/hallbook.html',{'data':data})
+

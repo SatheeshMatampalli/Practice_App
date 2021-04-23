@@ -1,0 +1,43 @@
+{% extends 'stc/base.html' %}
+{% block content %}
+<div class="container" style="margin-top: 80px">
+	<h2 class="text-center">HallBook</h2>
+	<br>
+	<br>
+	<form method="POST" id="indexForm" data-courses-url="{% url 'ajax_load_courses' %}">
+		{% csrf_token %}
+		<select name="programming" id="programming" class="form-control">
+			<option value="">---select type---</option>
+			{% for i in data %}
+			<option value="{{i.id}}">{{i.name}}</option>
+			{% endfor %}
+		</select>
+		<br>
+		<select name="courses" id="courses" class="form-control">
+			
+		</select>
+		<br>
+		<!-- <input type="file" name="csvfile" class="form-control"><br> -->
+		<input type="submit" value="Submit" class="form-control btn btn-primary">
+	</form>
+</div>
+
+<script>
+	$('#programming').change(function(){
+
+		var url=$('#indexForm').attr('data-courses-url');
+		var programmingId=$(this).val();
+		$.ajax({
+			url:url,
+			data:{
+				'programming':programmingId
+			},
+			success:function(data){
+				$("#courses").html(data);
+			}
+		});
+
+
+	});
+</script>
+{% endblock %}

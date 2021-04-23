@@ -28,3 +28,29 @@ class Bookreq(models.Model):
 	uploadby=models.CharField(max_length=120,default="")
 	up=models.ForeignKey(User,on_delete=models.CASCADE,default="")
 
+class Halldistrict(models.Model):
+	name=models.CharField(max_length=90)
+
+	def __str__(self):
+		return self.name
+
+class Hallname(models.Model):
+	programming=models.ForeignKey(Halldistrict,on_delete=models.CASCADE)
+	name=models.CharField(max_length=100)
+	def __str__(self):
+		return self.name
+
+class Halldetails(models.Model):
+	hallid=models.ForeignKey(Hallname,on_delete=models.CASCADE)
+	h_name=models.CharField(max_length=50)
+	h_capacity=models.IntegerField()
+	h_location=models.CharField(max_length=2000)
+	h_images=models.ImageField(upload_to='halls/',default="profile.png")
+	h_number=models.CharField(max_length=12)
+	def __str__(self):
+		return self.h_name
+
+
+
+
+

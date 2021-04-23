@@ -4,6 +4,9 @@ from django.contrib.auth import views as ad
 
 urlpatterns = [
 	path('',views.home,name="hm"),
+	path('hallsview/',views.hallsview,name='hallsview'),
+	path('reg_halls/',views.reghalls,name="reg_halls"),
+	path('load-courses/',views.load_courses,name='ajax_load_courses'),
 	path('viewn/',views.viewnt,name='viewn'),
 	path('notipending/',views.notipending,name="notipending"),
 	path('myreq/',views.myreq,name='myreq'),

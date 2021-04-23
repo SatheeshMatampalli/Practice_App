@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm,PasswordChangeForm
 from django import forms
-from Noteapp.models import Complaintbox,ImProfile,Bookreq
+from Noteapp.models import Complaintbox,ImProfile,Bookreq,Halldetails
 
 
 class UsForm(UserCreationForm):
@@ -58,6 +58,32 @@ class ImForm(forms.ModelForm):
 			}),
 		}
 
+class HallForm(forms.ModelForm):
+	class Meta:
+		model=Halldetails
+		fields='__all__'
+		widgets = {
+		"h_name":forms.TextInput(attrs={
+			"class":"form-control",
+			"placeholder":"emter hall name",
+			}),
+		"h_capacity":forms.NumberInput(attrs={
+			"class":"form-control",
+			"placeholder":"emter capacity",
+			}),
+		"h_location":forms.TextInput(attrs={
+			"class":"form-control",
+			"placeholder":"emter hall location",
+			}),
+		"h_number":forms.TextInput(attrs={
+			"class":"form-control",
+			"placeholder":"emter hall phone no",
+			}),
+		
+		
+		}
+
+
 class ChpwdForm(PasswordChangeForm):
 	old_password=forms.CharField(widget=forms.PasswordInput(attrs={
 		"class":"form-control",
@@ -73,7 +99,6 @@ class ChpwdForm(PasswordChangeForm):
 		}))
 
 	class Meta:
-
 		model=User
 		fields=['oldpassword','newpassword','confirmpassword']
 		
